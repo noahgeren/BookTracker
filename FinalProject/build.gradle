@@ -34,7 +34,3 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 }
-
-test {
-	useJUnitPlatform()
-}
