@@ -1,0 +1,114 @@
+<!-- Made by Noah Geren for CSC 365 Fall 2019 using Thymeleaf, Bootstrap 4, and FeatherIcons -->
+<!DOCTYPE html>
+<html lang="en" th:lang="${#locale.language}" xmlns:th="https://thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Book Tracker</title>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../static/css/app.css" th:href="@{/css/app.css}">
+    <script src="../static/js/feather.min.js" th:src="@{/js/feather.min.js}"></script>
+	<script>
+		window.addEventListener('DOMContentLoaded', function(){
+			feather.replace();
+			document.getElementById('table-body').addEventListener('click', function(e){
+				let btn;
+				if((btn = e.path.filter(el => el.className == 'delete')).length){
+					if(confirm('Are you sure?')){
+						window.location.href = `/delete/${btn[0].dataset.id}`;
+					}
+				}
+			})
+		});
+	</script>
+</head>
+<body>
+	<div class="container-fluid pb-3">
+		<div th:replace="fragments/header"></div>
+		<div class="row">
+			<div class="col-10 offset-1">
+				<div class="card mt-3">
+					<div class="card-header">
+						<a href="edit.html" th:href="@{/create}" class="btn btn-primary mx-3"><span data-feather="plus" width="15" height="15" stroke-width="4"></span> Add Book</a>
+					</div>
+					<div class="card-body p-0">
+						<div class="table-responsive">
+							<table class="table table-striped table-hover">
+								<thead>
+									<tr>
+										<th>Action</th>
+										<th>Title</th>
+										<th>Author</th>
+										<th>Date Read</th>
+										<th>Finished</th>
+									</tr>
+								</thead>
+								<tbody id="table-body">
+									<tr th:if="!${#lists.isEmpty(books)}" th:each="book : ${books}">
+										<td>
+											<a href="edit.html" th:href="@{|/update/${book.id}|}"><span data-feather="edit" stroke="cornflowerblue"></span></a>
+											<span class="delete" th:data-id="${book.id}"><span data-feather="trash-2" stroke="red"></span></span>
+										</td>
+										<td th:text="${book.title}">Harry Potter and the Goblet of Fire</td>
+										<td th:text="${book.author}">J. K. Rowling</td>
+										<td th:text="${#dates.format(book.dateRead, 'MM/dd/yyyy')}">03/14/2015</td>
+										<td>
+											<span th:remove="all">
+												<!-- This is for design prototyping purposes only. -->
+												<span data-feather="check-circle" stroke="green"></span>
+											</span>
+											<span th:attr="data-feather=${book.finished ? 'check-circle' : 'x-circle'},stroke=${book.finished ? 'green' : 'red'}"></span>
+										</td>
+									</tr>
+									<tr th:remove="all">
+										<!-- This is for design prototyping purposes only. -->
+										<td>
+											<a href="edit.html"><span data-feather="edit" stroke="cornflowerblue"></span></a>
+											<a href="#" onclick="return confirm('Are you sure?');"><span data-feather="trash-2" stroke="red"></span></a>
+										</td>
+										<td>
+											Atlas Shrugged
+										</td>
+										<td>
+											Ayn Rand
+										</td>
+										<td>
+											04/02/2016
+										</td>
+										<td>
+											<span data-feather="x-circle" stroke="red"></span>
+										</td>
+									</tr>
+									<tr th:remove="all">
+										<!-- This is for design prototyping purposes only. -->
+										<td>
+											<a href="edit.html"><span data-feather="edit" stroke="cornflowerblue"></span></a>
+											<a href="#" onclick="return confirm('Are you sure?');"><span data-feather="trash-2" stroke="red"></span></a>
+										</td>
+										<td>
+											Java For Dummies
+										</td>
+										<td>
+											Barry A. Burd
+										</td>
+										<td>
+											07/04/2012
+										</td>
+										<td>
+											<span data-feather="check-circle" stroke="green"></span>
+										</td>
+									</tr>
+									<tr th:if="${#lists.isEmpty(books)}">
+								   		<td colspan="5" class="font-weight-bold text-center">No books recored so far...</td>
+								   	</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

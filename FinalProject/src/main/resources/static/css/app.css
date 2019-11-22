@@ -1,0 +1,20 @@
+/* 
+ *   Made by Noah Geren for CSC 365 Fall 2019.
+ */
+
+.feather-trash-2:hover {
+	stroke: #b90000;
+	cursor: pointer;
+}
+
+.feather-edit:hover {
+	stroke: #4e84e4;
+}
+
+.feather:hover, .btn:hover {
+	transform: scale(1.05)
+}
+
+td {
+	max-width: 20vw;
+}
