@@ -1,6 +1,14 @@
 /* 
  *   Made by Noah Geren for CSC 365 Fall 2019.
  */
+ 
+ footer {
+ 	max-height: 10vh;
+ }
+ 
+ div.container-fluid {
+ 	padding-bottom: 15vh;
+ }
 
 .feather-trash-2:hover {
 	stroke: #b90000;

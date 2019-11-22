@@ -10,17 +10,18 @@
     <link rel="stylesheet" href="../static/css/app.css" th:href="@{/css/app.css}">
 </head>
 <body>
-	<div class="container-fluid pb-3">
-		<div th:replace="fragments/header"></div>
+	<div class="container-fluid bg-light min-vh-100">
+		<div th:replace="fragments/general :: title-info"></div>
 		<div class="row">
-			<div class="col-10 offset-1">
+			<div class="col-10 offset-1 px-0">
 				<div class="card mt-3">
-				
-					<div class="card-header">
-						<a href="index.html" th:href="@{/home}">Back</a>
-						<h2 class="card-title" th:text="${book}?'Edit Book':'Add Book'">Add Book</h2>
+					<div class="card-header bg-white">
+						<div class="col offset-1">
+							<a href="index.html" th:href="@{/home}">Back</a>
+							<h2 class="card-title" th:text="${book}?'Edit Book':'Add Book'">Add Book</h2>
+						</div>
 					</div>
-					<div class="card-body">
+					<div class="card-body col-10 offset-1">
 						<form method="POST">
 							<div class="form-group">
 								<label for="title">Title:</label>
@@ -46,6 +47,7 @@
 				</div>
 			</div>
 		</div>
+		<div th:replace="fragments/general :: footer"></div>
 	</div>
 </body>
 </html>

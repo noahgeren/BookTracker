@@ -30,7 +30,7 @@ public class BookController {
 	 * @param model All books will be added to the model
 	 * @return "index"
 	 */
-	@GetMapping("/home")
+	@GetMapping(value = {"/", "/home"})
 	String home(Model model) {
 		model.addAttribute("books", bookService.getAll());
 		return "index";
