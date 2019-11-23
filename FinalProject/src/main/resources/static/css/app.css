@@ -19,10 +19,15 @@
 	stroke: #4e84e4;
 }
 
-.feather:hover, .btn:hover {
+.feather:hover, .btn:hover, img.book-cover:hover {
 	transform: scale(1.05)
 }
 
 td {
 	max-width: 20vw;
+}
+
+.book-cover{
+	height: 15vh;
+	width: calc(15vh * 0.69);
 }

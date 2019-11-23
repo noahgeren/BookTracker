@@ -44,6 +44,8 @@ public class Book {
 	
 	private Boolean finished;
 	
+	private String image;
+	
 	/**
 	 * Checks if finished is not null and true. Sets finished to false if null.
 	 * @return True if finished is true. False if finished is false or null.
