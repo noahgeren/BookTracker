@@ -15,7 +15,7 @@
 			document.getElementById('table-body').addEventListener('click', function(e){
 				let btn;
 				if((btn = e.path.filter(el => el.className == 'delete')).length){
-					if(confirm('Are you sure?')){
+					if(confirm('Are you sure?') && btn[0].dataset.id){
 						window.location.href = `/delete/${btn[0].dataset.id}`;
 					}
 				}
@@ -31,10 +31,10 @@
 				<div class="card mt-3">
 					<div class="card-header bg-white px-0">
 						<div class="col offset-1 px-0 py-1">
-							<a href="edit.html" th:href="@{/create}" class="btn btn-primary"><span data-feather="plus" width="15" height="15" stroke-width="4"></span> Add Book</a>
+							<a href="edit.html" th:href="@{/create}" class="btn btn-primary"><span data-feather="plus"></span> Add Book</a>
 						</div>
 					</div>
-					<div class="card-body col-10 offset-1 px-0">
+					<div class="card-body text-center col-10 offset-1 px-0">
 						<div class="table-responsive">
 							<table class="table table-hover">
 								<thead>
@@ -50,8 +50,8 @@
 								<tbody id="table-body">
 									<tr th:if="!${#lists.isEmpty(books)}" th:each="book : ${books}">
 										<td>
-											<a href="edit.html" th:href="@{|/update/${book.id}|}"><span data-feather="edit" stroke="cornflowerblue"></span></a>
-											<span class="delete" th:data-id="${book.id}"><span data-feather="trash-2" stroke="red"></span></span>
+											<a href="edit.html" th:href="@{|/update/${book.id}|}"><span data-feather="edit"></span></a>
+											<span class="delete" th:data-id="${book.id}"><span data-feather="trash-2"></span></span>
 										</td>
 										<td th:text="${book.title}">Harry Potter and the Goblet of Fire</td>
 										<td th:text="${book.author}">J. K. Rowling</td>
@@ -59,7 +59,7 @@
 										<td>
 											<span th:remove="all">
 												<!-- This is for design prototyping purposes only. -->
-												<span data-feather="check-circle" stroke="green"></span>
+												<span data-feather="check-circle"></span>
 											</span>
 											<span th:attr="data-feather=${book.finished ? 'check-circle' : 'x-circle'},stroke=${book.finished ? 'green' : 'red'}"></span>
 										</td>
@@ -70,8 +70,8 @@
 									<tr th:remove="all">
 										<!-- This is for design prototyping purposes only. -->
 										<td>
-											<a href="edit.html"><span data-feather="edit" stroke="cornflowerblue"></span></a>
-											<a href="#" onclick="return confirm('Are you sure?');"><span data-feather="trash-2" stroke="red"></span></a>
+											<a href="edit.html"><span data-feather="edit"></span></a>
+											<a href="#" onclick="return confirm('Are you sure?');"><span data-feather="trash-2"></span></a>
 										</td>
 										<td>
 											Atlas Shrugged
@@ -83,14 +83,17 @@
 											04/02/2016
 										</td>
 										<td>
-											<span data-feather="x-circle" stroke="red"></span>
+											<span data-feather="x-circle"></span>
+										</td>
+										<td>
+											<img class="book-cover" />
 										</td>
 									</tr>
 									<tr th:remove="all">
 										<!-- This is for design prototyping purposes only. -->
 										<td>
-											<a href="edit.html"><span data-feather="edit" stroke="cornflowerblue"></span></a>
-											<a href="#" onclick="return confirm('Are you sure?');"><span data-feather="trash-2" stroke="red"></span></a>
+											<a href="edit.html"><span data-feather="edit"></span></a>
+											<a href="#" onclick="return confirm('Are you sure?');"><span data-feather="trash-2"></span></a>
 										</td>
 										<td>
 											Java For Dummies
@@ -102,11 +105,14 @@
 											07/04/2012
 										</td>
 										<td>
-											<span data-feather="check-circle" stroke="green"></span>
+											<span data-feather="check-circle"></span>
+										</td>
+										<td>
+											<img class="book-cover" />
 										</td>
 									</tr>
 									<tr th:if="${#lists.isEmpty(books)}">
-								   		<td colspan="5" class="font-weight-bold text-center">No books recored so far...</td>
+								   		<td colspan="6" class="font-weight-bold text-center">No books recored so far...</td>
 								   	</tr>
 								</tbody>
 							</table>

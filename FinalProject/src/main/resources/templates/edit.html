@@ -21,17 +21,21 @@
     					img.onload = function(){
     						currentCover.parentNode.replaceChild(img, currentCover);
     					}
-    					img.className = 'book-cover float-left ml-3';
+    					img.onerror = blankCover;
+    					img.className = 'book-cover float-md-left ml-3';
     					img.alt = 'Book Cover';
     					img.src = src;
     					img.id = 'book-cover';
     					return;
     				}
     			}
-    			let blank = document.createElement('span');
-    			blank.className = 'd-none';
-    			blank.id = 'book-cover';
-    			currentCover.parentNode.replaceChild(blank, currentCover);
+    			function blankCover(){
+	    			let blank = document.createElement('span');
+	    			blank.className = 'd-none';
+	    			blank.id = 'book-cover';
+	    			currentCover.parentNode.replaceChild(blank, currentCover);
+    			}
+    			blankCover();
     		})
     	});
     </script>
@@ -67,8 +71,8 @@
 								<input class="form-control" id="image" name="image" th:value="${book?.image}" />
 								<small class="text-danger" id="image-error"></small>
 							</div>
-							<div>
-								<img th:classappend="${book != null and book.image != ''} ? '' : 'd-none'" th:src="${book?.image}" class="book-cover float-left ml-3" id='book-cover' alt="Book Cover"/>
+							<div class="text-center">
+								<img th:classappend="${book != null and book.image != ''} ? '' : 'd-none'" th:src="${book?.image}" class="book-cover float-md-left ml-3" id='book-cover' alt="Book Cover"/>
 							</div>
 							<div class="text-center">
 								<div class="form-check">

@@ -9,10 +9,18 @@
  div.container-fluid {
  	padding-bottom: 15vh;
  }
+ 
+ .feather-trash-2, .feather-x-circle {
+ 	stroke: red;
+ }
 
 .feather-trash-2:hover {
 	stroke: #b90000;
 	cursor: pointer;
+}
+
+.feather-edit{
+	stroke: cornflowerblue;
 }
 
 .feather-edit:hover {
@@ -23,8 +31,24 @@
 	transform: scale(1.05)
 }
 
-td {
+.feather-check-circle {
+	stroke: green;
+}
+
+.feather-check-circle, .feather-x-circle {
+	width: 32px;
+	height: 32px;
+}
+
+.feather-plus {
+	width: 15px;
+	height: 15px;
+	stroke-width: 4;
+}
+
+.table td, .table th {
 	max-width: 20vw;
+	vertical-align: middle;
 }
 
 .book-cover{
