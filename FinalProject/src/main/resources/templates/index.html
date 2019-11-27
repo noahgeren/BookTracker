@@ -10,9 +10,22 @@
     <link rel="stylesheet" href="../static/css/app.css" th:href="@{/css/app.css}">
     <script src="../static/js/feather.min.js" th:src="@{/js/feather.min.js}"></script>
 	<script>
-		window.addEventListener('DOMContentLoaded', function(){
+		window.addEventListener('DOMContentLoaded', init);
+		
+		function init(){
 			feather.replace();
-		});
+			const deleteBtns = document.getElementsByClassName('delete');
+			for(const deleteBtn of deleteBtns){
+				deleteBtn.addEventListener('click', deleteBook)
+			}
+		}
+		
+		function deleteBook(){
+			const id = this.dataset.id;
+			if(id && confirm('Are you sure?')){
+				window.location.href = `/delete/${id}`;
+			}
+		}
 	</script>
 </head>
 <body>
@@ -27,86 +40,86 @@
 						</div>
 					</div>
 					<div class="card-body text-center col-10 offset-1 p-0">
-							<table class="table table-hover">
-								<thead>
-									<tr>
-										<th>Action</th>
-										<th>Title</th>
-										<th>Author</th>
-										<th>Date Read</th>
-										<th>Finished</th>
-										<th>Book Cover</th>
-									</tr>
-								</thead>
-								<tbody id="table-body">
-									<tr th:if="!${#lists.isEmpty(books)}" th:each="book : ${books}">
-										<td>
-											<a href="edit.html" th:href="@{|/update/${book.id}|}"><span data-feather="edit"></span></a>
-											<a href="#" th:href="@{|/delete/${book.id}|}" onclick="return confirm('Are you sure?');"><span data-feather="trash-2"></span></a>
-										</td>
-										<td th:text="${book.title}">Harry Potter and the Goblet of Fire</td>
-										<td th:text="${book.author}">J. K. Rowling</td>
-										<td th:text="${#dates.format(book.dateRead, 'MM/dd/yyyy')}">03/14/2015</td>
-										<td>
-											<span th:remove="all">
-												<!-- This is for design prototyping purposes only. -->
-												<span data-feather="check-circle"></span>
-											</span>
-											<span th:attr="data-feather=${book.finished ? 'check-circle' : 'x-circle'},stroke=${book.finished ? 'green' : 'red'}"></span>
-										</td>
-										<td>
-											<img th:if="${book.image != ''}" th:src="${book.image}" th:alt="${book.title + ' cover.'}" class="book-cover"/>
-										</td>
-									</tr>
-									<tr th:remove="all">
-										<!-- This is for design prototyping purposes only. -->
-										<td>
-											<a href="edit.html"><span data-feather="edit"></span></a>
-											<a href="#" onclick="return confirm('Are you sure?');"><span data-feather="trash-2"></span></a>
-										</td>
-										<td>
-											Atlas Shrugged
-										</td>
-										<td>
-											Ayn Rand
-										</td>
-										<td>
-											04/02/2016
-										</td>
-										<td>
-											<span data-feather="x-circle"></span>
-										</td>
-										<td>
-											<img class="book-cover" />
-										</td>
-									</tr>
-									<tr th:remove="all">
-										<!-- This is for design prototyping purposes only. -->
-										<td>
-											<a href="edit.html"><span data-feather="edit"></span></a>
-											<a href="#" onclick="return confirm('Are you sure?');"><span data-feather="trash-2"></span></a>
-										</td>
-										<td>
-											Java For Dummies
-										</td>
-										<td>
-											Barry A. Burd
-										</td>
-										<td>
-											07/04/2012
-										</td>
-										<td>
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>Action</th>
+									<th>Title</th>
+									<th>Author</th>
+									<th>Date Read</th>
+									<th>Finished</th>
+									<th>Book Cover</th>
+								</tr>
+							</thead>
+							<tbody id="table-body">
+								<tr th:if="!${#lists.isEmpty(books)}" th:each="book : ${books}">
+									<td>
+										<a href="edit.html" th:href="@{|/update/${book.id}|}"><span data-feather="edit"></span></a>
+										<span class="delete" th:data-id="${book.id}"><span data-feather="trash-2"></span></span>
+									</td>
+									<td th:text="${book.title}">Harry Potter and the Goblet of Fire</td>
+									<td th:text="${book.author}">J. K. Rowling</td>
+									<td th:text="${#dates.format(book.dateRead, 'MM/dd/yyyy')}">03/14/2015</td>
+									<td>
+										<span th:remove="all">
+											<!-- This is for design prototyping purposes only. -->
 											<span data-feather="check-circle"></span>
-										</td>
-										<td>
-											<img class="book-cover" />
-										</td>
-									</tr>
-									<tr th:if="${#lists.isEmpty(books)}">
-								   		<td colspan="6" class="font-weight-bold text-center">No books recored so far...</td>
-								   	</tr>
-								</tbody>
-							</table>
+										</span>
+										<span th:attr="data-feather=${book.finished ? 'check-circle' : 'x-circle'},stroke=${book.finished ? 'green' : 'red'}"></span>
+									</td>
+									<td>
+										<img th:if="${book.image != ''}" th:src="${book.image}" th:alt="${book.title + ' cover.'}" class="book-cover"/>
+									</td>
+								</tr>
+								<tr th:remove="all">
+									<!-- This is for design prototyping purposes only. -->
+									<td>
+										<a href="edit.html"><span data-feather="edit"></span></a>
+										<span class="delete"><span data-feather="trash-2"></span></span>
+									</td>
+									<td>
+										Atlas Shrugged
+									</td>
+									<td>
+										Ayn Rand
+									</td>
+									<td>
+										04/02/2016
+									</td>
+									<td>
+										<span data-feather="x-circle"></span>
+									</td>
+									<td>
+										<img class="book-cover" />
+									</td>
+								</tr>
+								<tr th:remove="all">
+									<!-- This is for design prototyping purposes only. -->
+									<td>
+										<a href="edit.html"><span data-feather="edit"></span></a>
+										<span class="delete"><span data-feather="trash-2"></span></span>
+									</td>
+									<td>
+										Java For Dummies
+									</td>
+									<td>
+										Barry A. Burd
+									</td>
+									<td>
+										07/04/2012
+									</td>
+									<td>
+										<span data-feather="check-circle"></span>
+									</td>
+									<td>
+										<img class="book-cover" />
+									</td>
+								</tr>
+								<tr th:if="${#lists.isEmpty(books)}">
+							   		<td colspan="6" class="font-weight-bold text-center">No books recored so far...</td>
+							   	</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>

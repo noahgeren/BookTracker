@@ -29,9 +29,10 @@
     					return;
     				}
     			}
-    			function blankCover(){
+    			function blankCover(e){
 	    			let blank = document.createElement('span');
-	    			blank.className = 'd-none';
+	    			blank.className = 'text-danger';
+	    			blank.appendChild(document.createTextNode(e ? 'Could not load image.' : 'Cover URL must end with .jpg, .png, etc.'));
 	    			blank.id = 'book-cover';
 	    			currentCover.parentNode.replaceChild(blank, currentCover);
     			}
