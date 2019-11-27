@@ -51,7 +51,29 @@
 	vertical-align: middle;
 }
 
-.book-cover{
+.book-cover {
 	height: 15vh;
 	width: calc(15vh * 0.69);
+}
+
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
+	
+	.table, .table thead, .table tbody, .table th, .table td, .table tr { 
+		display: block;
+		margin: 0;
+		max-width: 100%;
+		width: 100%;
+	}
+	
+	.table thead th {
+		border-bottom: 0;
+	}
+	
+	.table tr { 
+		border-bottom: 2px solid #aaa; 
+	}
+	
+	.table tbody tr:last-of-type {
+		border-bottom : 0;
+	}
 }
