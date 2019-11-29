@@ -56,6 +56,10 @@
 	width: calc(15vh * 0.69);
 }
 
+.table th {
+	border-top: 0;
+}
+
 @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
 	
 	.table, .table thead, .table tbody, .table th, .table td, .table tr { 
@@ -67,6 +71,10 @@
 	
 	.table thead th {
 		border-bottom: 0;
+	}
+	
+	.table thead th:not(:first-child) {
+		border-top: 1px solid #dee2e6;
 	}
 	
 	.table tr { 
