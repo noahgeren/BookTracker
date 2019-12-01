@@ -2,6 +2,11 @@
 
 CRUD application for tracking book reading. 
 
+## Notable Features
+- App is fully mobile accessible.
+- Thymeleaf templates ([resources/templates](FinalProject/src/main/resources/templates)) can all be viewed as prototypes in browser without the app running.
+- Helpful cover image url error messages.
+
 ## Made using:
 - Spring Boot
 - Thymeleaf Template Engine
